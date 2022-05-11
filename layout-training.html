@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>layout training 36</title>
+  <style>
+    .transparent{
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <section>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </section>
+    <section>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    </section>
+  </div>
+  <script>
+    // root 식별
+    const root = document.getElementById('root');
+    console.log(root);
+    // root style
+    root.setAttribute('style','width: 100vw; height: 100vh; display: grid; grid-template-columns: 1fr 1fr;');
+    
+    // section 식별
+    // console.log(root.children);
+    const colorCon = root.children[0];
+    const textCon = root.children[1];
+    console.log(colorCon);
+    console.log(textCon);
+
+    // root.children style
+    for(let i = 0; i < root.children.length; i++){
+      root.children[i].setAttribute('style','display: flex; align-items: center;');
+    }
+    // colorCon style
+    colorCon.style.display = 'flex';
+    colorCon.style.flexDirection = 'column';
+    colorCon.style.alignItems = 'flex-end';
+    colorCon.style.justifyContent = 'center';
+
+    // textCon style
+
+    // 출력해줄 textArr, bgArr 
+    let textArr = ['function','variable','constant','index','object','array'];
+    let bgArr = ['green','red','yellow','orange','pink','purple'];
+
+    const colorText = document.createElement('div');
+    console.log(colorText);
+    
+    // ?마지막 컨텐츠만 생겨서
+    // 반복해서 textArr에 bgArr의 원소를 bgc로 적용해서 colorText의 자식태그로 추가해줄 부분
+    // ! 이벤트 핸들러의 지역변수로 .createElement();
+    // for(let i = 0; i < textArr.length; i++){
+    //   console.log(textArr[i]);
+    //   colorCon.appendChild(colorText);
+    //   console.log(colorText);
+    //   text = textArr[i];
+    //   console.log(text);
+    //   console.dir(colorText);
+    //   colorText.textContent = text;
+    // }
+
+    // colorCon.children
+    // console.log(colorCon.children);
+    const colorChild = colorCon.children;
+
+    // textCon.children
+    // console.log(textCon.children);
+    const textChild = textCon.children[0];
+    console.log(textChild);
+    textChild.style.color = '#c4c4c4';
+    textChild.style.fontSize = '0.8rem';
+    textChild.style.position = 'relative';
+    textChild.style.top = '80px';
+    textChild.style.paddingLeft = '10px';
+
+
+    // 반복해서 텍스트와 컬러를 적용해줄 부분
+    for(let i = 0; i < colorChild.length; i++){
+      colorChild[i].textContent = textArr[i];
+      colorChild[i].style.color = bgArr[i];
+      colorChild[i].style.fontSize = '5rem';
+      colorChild[i].style.fontWeight = '900';
+      colorChild[i].style.lineHeight = '30px';
+      colorChild[i].style.opacity = '0.5';
+      colorChild[i].style.mixBlendMode = 'multiply';
+      // console.log(colorChild[i].style);
+      mouseMove(colorChild[i]);
+    }
+
+    function mouseMove(target){
+      // colorCon에 마우스오버 이벤트를 적용
+      target.addEventListener('mouseover', function(){
+        target.classList.remove('transparent');
+        target.style.opacity = 1;
+      });
+      // colorCon에 마우스아웃 이벤트를 적용
+      target.addEventListener('mouseout', function(){
+        target.classList.add('transparent');
+      });
+    }
+
+  </script>
+</body>
+</html>
